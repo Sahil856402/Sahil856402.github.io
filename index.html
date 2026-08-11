@@ -3,457 +3,537 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohd Sahil — Software Developer</title>
-<meta name="description" content="Mohd Sahil — Full-stack developer. MERN, Spring Boot, REST APIs.">
+<title>Mohd Sahil — Full-Stack Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #14161c;
-    --bg-raised: #1b1e26;
-    --bg-panel: #20232d;
-    --border: #2c2f3a;
-    --text: #e7e9ee;
-    --text-dim: #8b93a7;
-    --text-faint: #565c6d;
-    --amber: #e9a23b;
-    --mint: #5fd68c;
-    --blue: #6ea8fe;
-    --red: #f2777a;
+    --bg: #F3F6F8;
+    --surface: #FFFFFF;
+    --line: #DBE2E8;
+    --line-soft: #E7ECF0;
+    --ink: #10161F;
+    --ink-dim: #57626F;
+    --ink-faint: #93A0AB;
+    --dark: #0D1218;
+    --dark-surface: #161D26;
+    --dark-line: #2A343F;
+    --amber: #E8960C;
+    --amber-soft: #FDF1DA;
+    --teal: #1B8E82;
+    --teal-soft: #DEF2EF;
+    --violet: #6A5ACD;
+    --violet-soft: #EAE7F9;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
     --mono: 'JetBrains Mono', monospace;
-    --sans: 'Inter', sans-serif;
+    --r: 10px;
   }
-  *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
     line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    font-size:15px;
   }
-  ::selection{ background: var(--amber); color:#14161c; }
-  a{ color:inherit; }
-  .wrap{ max-width: 880px; margin:0 auto; padding: 0 24px; }
-
-  /* NAV */
-  nav{
-    position: sticky; top:0; z-index: 50;
-    background: rgba(20,22,28,0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:56px; }
-  .brand{ font-family: var(--mono); font-weight:700; font-size:14px; color: var(--text); letter-spacing:0.02em; }
-  .brand .dot{ color: var(--mint); }
-  .navlinks{ display:flex; gap:22px; font-family: var(--mono); font-size:12.5px; color: var(--text-dim); }
-  .navlinks a{ text-decoration:none; transition: color .15s; }
-  .navlinks a:hover{ color: var(--amber); }
-  @media (max-width:560px){ .navlinks{ display:none; } }
-
-  /* HERO / TERMINAL */
-  header.hero{ padding: 64px 0 40px; }
-  .term{
-    background: var(--bg-raised);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow:hidden;
-    box-shadow: 0 20px 60px -30px rgba(0,0,0,0.6);
-  }
-  .term-bar{
-    display:flex; align-items:center; gap:8px;
-    padding: 10px 14px;
-    background: var(--bg-panel);
-    border-bottom: 1px solid var(--border);
-  }
-  .term-dot{ width:10px; height:10px; border-radius:50%; }
-  .term-dot.r{ background:#ff5f56; }
-  .term-dot.y{ background:#ffbd2e; }
-  .term-dot.g{ background:#27c93f; }
-  .term-title{ margin-left:8px; font-family: var(--mono); font-size:11.5px; color: var(--text-faint); }
-  .term-body{ padding: 22px 22px 26px; font-family: var(--mono); font-size: 13.5px; }
-  .term-line{ display:flex; gap:10px; margin-bottom:6px; flex-wrap:wrap; }
-  .prompt{ color: var(--mint); }
-  .cmd{ color: var(--text); }
-  .cmd-typed::after{
-    content:'▍'; color: var(--amber); margin-left:2px;
-    animation: blink 1s step-start infinite;
-  }
-  @keyframes blink{ 50%{ opacity:0; } }
-  .resp{ margin-top: 14px; padding-left: 4px; color: var(--text-dim); }
-  .resp .key{ color: var(--blue); }
-  .resp .str{ color: var(--amber); }
-  .resp .status{ color: var(--mint); font-weight:600; }
-
-  .hero-title{
-    font-family: var(--mono); font-weight:800; font-size: clamp(28px, 5.5vw, 44px);
-    margin-top: 30px; letter-spacing:-0.02em; line-height:1.15;
-  }
-  .hero-title .amber{ color: var(--amber); }
-  .hero-sub{ margin-top:14px; color: var(--text-dim); font-size:16px; max-width:60ch; }
-  .hero-links{ margin-top:24px; display:flex; gap:14px; flex-wrap:wrap; }
-  .btn{
-    font-family: var(--mono); font-size:12.5px; padding:10px 16px; border-radius:6px;
-    text-decoration:none; border:1px solid var(--border); color: var(--text);
-    transition: border-color .15s, color .15s, transform .15s;
-    display:inline-flex; align-items:center; gap:6px;
-  }
-  .btn:hover{ border-color: var(--amber); color: var(--amber); transform: translateY(-1px); }
-  .btn.primary{ background: var(--amber); color:#14161c; border-color:var(--amber); font-weight:700; }
-  .btn.primary:hover{ color:#14161c; opacity:0.9; }
-
-  /* SECTION HEADERS — endpoint style */
-  section{ padding: 52px 0; border-top: 1px solid var(--border); }
-  .endpoint{
-    display:flex; align-items:baseline; gap:10px; margin-bottom:22px; flex-wrap:wrap;
-  }
-  .method{
-    font-family: var(--mono); font-size:11.5px; font-weight:800; padding:3px 8px;
-    border-radius:4px; letter-spacing:0.03em;
-  }
-  .method.get{ background: rgba(95,214,140,0.12); color: var(--mint); border:1px solid rgba(95,214,140,0.35); }
-  .method.post{ background: rgba(110,168,254,0.12); color: var(--blue); border:1px solid rgba(110,168,254,0.35); }
-  .path{ font-family: var(--mono); font-size:15px; color: var(--text); font-weight:600; }
-  .section-desc{ color: var(--text-faint); font-family: var(--mono); font-size:12px; margin-left:auto; }
-  @media (max-width:560px){ .section-desc{ margin-left:0; } }
-
-  /* SUMMARY */
-  .summary-card{
-    background: var(--bg-raised); border:1px solid var(--border); border-radius:10px;
-    padding: 22px 24px; color: var(--text-dim); font-size:15px;
-  }
-  .summary-card strong{ color: var(--text); font-weight:600; }
-
-  /* SKILLS */
-  .skill-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:14px; }
-  .skill-block{
-    background: var(--bg-raised); border:1px solid var(--border); border-radius:8px; padding:16px 18px;
-  }
-  .skill-block h4{
-    font-family: var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
-    color: var(--text-faint); margin-bottom:10px; font-weight:600;
-  }
-  .tag-row{ display:flex; flex-wrap:wrap; gap:7px; }
-  .tag{
-    font-family: var(--mono); font-size:12px; padding:4px 9px; border-radius:5px;
-    background: var(--bg-panel); border:1px solid var(--border); color: var(--text);
-  }
-
-  /* PROJECTS */
-  .project{
-    background: var(--bg-raised); border:1px solid var(--border); border-radius:10px;
-    margin-bottom: 18px; overflow:hidden;
-  }
-  .project-head{
-    display:flex; align-items:center; gap:10px; padding:14px 18px;
-    border-bottom:1px solid var(--border); flex-wrap:wrap;
-  }
-  .project-name{ font-family: var(--mono); font-weight:700; font-size:14.5px; }
-  .status-code{
-    margin-left:auto; font-family: var(--mono); font-size:11.5px; font-weight:700;
-    color: var(--mint); background: rgba(95,214,140,0.1); padding:2px 8px; border-radius:4px;
-  }
-  .project-body{ padding: 16px 18px 20px; }
-  .project-desc{ color: var(--text-dim); font-size:14.5px; margin-bottom:12px; }
-  .project-body ul{ list-style:none; }
-  .project-body li{
-    font-size:13.5px; color: var(--text-dim); padding-left:18px; position:relative; margin-bottom:6px;
-  }
-  .project-body li::before{
-    content:'→'; position:absolute; left:0; color: var(--amber); font-family: var(--mono);
-  }
-  .project-links{ margin-top:12px; display:flex; gap:10px; }
-  .project-links a{
-    font-family: var(--mono); font-size:12px; color: var(--text-faint); text-decoration:none;
-    border:1px dashed var(--border); padding:4px 9px; border-radius:5px;
-  }
-  .project-links a:hover{ color: var(--amber); border-color: var(--amber); }
-
-  /* TRAINING / EDU / TIMELINE */
-  .tl-item{ display:flex; gap:16px; margin-bottom:20px; }
-  .tl-marker{ font-family: var(--mono); font-size:11px; color: var(--text-faint); min-width:78px; padding-top:2px; }
-  .tl-content h4{ font-size:15px; font-weight:600; margin-bottom:4px; }
-  .tl-content p{ color: var(--text-dim); font-size:14px; }
-
-  /* ACHIEVEMENTS */
-  .ach-list{ display:grid; gap:10px; }
-  .ach-item{
-    display:flex; gap:12px; align-items:flex-start; background: var(--bg-raised);
-    border:1px solid var(--border); border-radius:8px; padding:12px 16px; font-size:14px; color: var(--text-dim);
-  }
-  .ach-item .status{ color: var(--mint); font-family:var(--mono); font-size:11.5px; font-weight:700; padding-top:1px; }
-
-  /* FOOTER */
-  footer{ padding: 40px 0 60px; border-top:1px solid var(--border); }
-  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
-  .foot-row p{ color: var(--text-faint); font-family: var(--mono); font-size:12px; }
-  .foot-links{ display:flex; gap:16px; }
-  .foot-links a{ font-family: var(--mono); font-size:12px; color: var(--text-dim); text-decoration:none; }
-  .foot-links a:hover{ color: var(--amber); }
-
-  h2.visually-endpoint{ display:none; }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--amber); color:#1a1200;}
+  img{max-width:100%;display:block;}
 
   @media (prefers-reduced-motion: reduce){
-    .cmd-typed::after{ animation:none; }
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+  a:focus-visible, button:focus-visible, .btn:focus-visible{
+    outline:2px solid var(--amber); outline-offset:3px; border-radius:4px;
   }
 
-  :focus-visible{ outline: 2px solid var(--amber); outline-offset:2px; }
+  .wrap{max-width:900px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(243,246,248,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:900px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{font-family:var(--mono); font-weight:600; font-size:14px; display:flex; align-items:center; gap:8px;}
+  .logo .dot{width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 0 3px var(--amber-soft); flex-shrink:0;}
+  nav.links{display:flex; gap:24px; font-family:var(--mono); font-size:12.5px; color:var(--ink-dim);}
+  nav.links a{transition:color .15s ease; position:relative;}
+  nav.links a::before{content:'/'; color:var(--ink-faint); margin-right:2px;}
+  nav.links a:hover{color:var(--amber);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:80px 0 64px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 30% 20%, black 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 30% 20%, black 20%, transparent 75%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;
+    display:grid; grid-template-columns:1.15fr 1fr; gap:48px; align-items:start;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:18px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow .bar{width:16px; height:1px; background:var(--amber);}
+  h1.hero-title{
+    font-family:var(--display); font-weight:600; letter-spacing:-0.02em;
+    font-size:clamp(32px, 4.6vw, 46px); line-height:1.14; color:var(--ink);
+    margin-bottom:20px;
+  }
+  h1.hero-title em{
+    font-style:normal; color:var(--amber);
+  }
+  .hero-sub{
+    font-size:15.5px; color:var(--ink-dim); max-width:440px; margin-bottom:28px;
+  }
+  .hero-meta{
+    font-family:var(--mono); font-size:12px; color:var(--ink-faint);
+    display:flex; gap:16px; flex-wrap:wrap; margin-bottom:30px;
+  }
+  .hero-meta span{display:flex; align-items:center; gap:6px;}
+  .cta-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:12.5px; font-weight:500;
+    padding:11px 18px; border-radius:7px; border:1px solid var(--line);
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+    transition:all .18s ease; background:var(--surface);
+  }
+  .btn-primary{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .btn-primary:hover{background:var(--amber); border-color:var(--amber); color:#1a1200;}
+  .btn-ghost{color:var(--ink-dim); background:transparent;}
+  .btn-ghost:hover{border-color:var(--ink); color:var(--ink);}
+
+  /* ---------- TERMINAL ---------- */
+  .terminal{
+    background:var(--dark); border-radius:12px; overflow:hidden;
+    border:1px solid var(--dark-line);
+    box-shadow:0 20px 40px -20px rgba(13,18,24,0.4);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:6px;
+    padding:11px 14px; border-bottom:1px solid var(--dark-line);
+  }
+  .terminal-bar .tdot{width:9px; height:9px; border-radius:50%; background:#3A4451;}
+  .terminal-title{
+    font-family:var(--mono); font-size:11px; color:#6B7684;
+    margin-left:8px;
+  }
+  .terminal-body{
+    padding:20px 18px; font-family:var(--mono); font-size:12.5px;
+    color:#C7CFD8; line-height:1.9;
+  }
+  .terminal-body .ln{opacity:0; animation:tline .5s ease forwards;}
+  .terminal-body .ln:nth-child(1){animation-delay:.15s;}
+  .terminal-body .ln:nth-child(2){animation-delay:.5s;}
+  .terminal-body .ln:nth-child(3){animation-delay:.85s;}
+  .terminal-body .ln:nth-child(4){animation-delay:1.15s;}
+  .terminal-body .ln:nth-child(5){animation-delay:1.45s;}
+  .terminal-body .ln:nth-child(6){animation-delay:1.75s;}
+  .terminal-body .ln:nth-child(7){animation-delay:2.05s;}
+  .terminal-body .ln:nth-child(8){animation-delay:2.35s;}
+  @keyframes tline{from{opacity:0; transform:translateY(3px);} to{opacity:1; transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){
+    .terminal-body .ln{opacity:1; animation:none;}
+  }
+  .prompt{color:var(--teal);}
+  .tkey{color:#7FB0FF;}
+  .tstr{color:#F5C97A;}
+  .tcomment{color:#5A6472;}
+  .cursor{display:inline-block; width:6px; height:12px; background:var(--amber); margin-left:2px; vertical-align:middle; animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- SECTIONS ---------- */
+  .section{padding:60px 0; border-bottom:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:8px;}
+  .section-tag{font-family:var(--mono); font-size:11.5px; color:var(--amber); text-transform:uppercase; letter-spacing:0.1em;}
+  .section-title{font-family:var(--display); font-size:23px; font-weight:600; letter-spacing:-0.01em; margin-bottom:32px;}
+
+  /* ---------- ENDPOINT CARDS (projects) ---------- */
+  .endpoint{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    margin-bottom:14px; overflow:hidden;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .endpoint:hover{border-color:var(--ink-faint);}
+  .endpoint-head{
+    display:flex; align-items:center; gap:12px; padding:14px 18px;
+    border-bottom:1px solid var(--line-soft); flex-wrap:wrap;
+  }
+  .method{
+    font-family:var(--mono); font-size:11px; font-weight:600; padding:3px 9px;
+    border-radius:5px; letter-spacing:0.02em; flex-shrink:0;
+  }
+  .method-get{background:var(--teal-soft); color:var(--teal);}
+  .method-post{background:var(--amber-soft); color:#9C6600;}
+  .method-put{background:var(--violet-soft); color:var(--violet);}
+  .path{font-family:var(--mono); font-size:12.5px; color:var(--ink); font-weight:500;}
+  .status-pill{
+    margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--teal);
+    display:flex; align-items:center; gap:5px;
+  }
+  .status-pill .sdot{width:6px; height:6px; border-radius:50%; background:var(--teal);}
+  .endpoint-body{padding:16px 18px 18px;}
+  .project-name{font-family:var(--display); font-size:17px; font-weight:600; margin-bottom:6px;}
+  .project-desc{color:var(--ink-dim); font-size:13.5px; margin-bottom:14px; max-width:620px;}
+  .response-block{
+    background:var(--bg); border:1px solid var(--line-soft); border-radius:7px;
+    padding:12px 14px; font-family:var(--mono); font-size:11.5px; color:var(--ink-dim);
+  }
+  .response-block .rk{color:var(--ink-faint);}
+  .response-block .rv{color:var(--ink);}
+  .project-points{list-style:none; margin-top:12px;}
+  .project-points li{font-size:13px; color:var(--ink-dim); padding-left:15px; position:relative; margin-bottom:5px;}
+  .project-points li::before{content:'▸'; position:absolute; left:0; color:var(--amber); font-size:11px;}
+
+  /* ---------- STACK (skills as architecture layers) ---------- */
+  .stack-layer{
+    display:grid; grid-template-columns:150px 1fr; gap:20px;
+    padding:18px 0; border-top:1px solid var(--line-soft);
+    align-items:start;
+  }
+  .stack-layer:first-child{border-top:none; padding-top:0;}
+  .layer-label{
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:0.08em; padding-top:5px;
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:var(--mono); font-size:12px; padding:6px 12px; border-radius:6px;
+    background:var(--surface); color:var(--ink); border:1px solid var(--line);
+  }
+
+  /* ---------- TRAINING TIMELINE ---------- */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:var(--line);
+  }
+  .tl-entry{position:relative; padding-bottom:28px;}
+  .tl-entry:last-child{padding-bottom:0;}
+  .tl-entry::before{
+    content:''; position:absolute; left:-26px; top:5px; width:11px; height:11px;
+    border-radius:50%; background:var(--surface); border:2px solid var(--amber);
+  }
+  .tl-time{font-family:var(--mono); font-size:11px; color:var(--amber); margin-bottom:4px;}
+  .tl-role{font-size:15px; font-weight:600; margin-bottom:2px;}
+  .tl-org{font-family:var(--mono); font-size:12px; color:var(--ink-faint); margin-bottom:8px;}
+  .tl-desc{color:var(--ink-dim); font-size:13.5px; max-width:560px;}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-item{padding:14px 0; border-top:1px solid var(--line-soft); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .edu-item:first-child{border-top:none; padding-top:0;}
+  .edu-title{font-weight:600; font-size:14.5px;}
+  .edu-meta{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); text-align:right;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--dark); border-radius:14px; padding:44px 36px; margin:60px 0;
+    border:1px solid var(--dark-line);
+  }
+  .contact-title{font-family:var(--display); font-size:27px; font-weight:600; color:#fff; margin-bottom:8px; letter-spacing:-0.01em;}
+  .contact-sub{color:#8A94A1; font-size:14px; margin-bottom:26px; max-width:440px;}
+  .contact-cmds{display:flex; flex-direction:column; gap:2px; margin-bottom:24px;}
+  .cmd{
+    font-family:var(--mono); font-size:13px; color:#C7CFD8;
+    padding:10px 14px; border-radius:7px; display:flex; align-items:center; gap:10px;
+    transition:background .15s ease;
+  }
+  .cmd:hover{background:var(--dark-surface);}
+  .cmd .prompt{color:var(--amber);}
+  .cmd .flag{color:#6B7684;}
+  .cmd .val{color:#F5C97A; margin-left:auto;}
+  .contact-links{display:flex; gap:10px; flex-wrap:wrap;}
+  .contact-links .btn-primary{background:var(--amber); border-color:var(--amber); color:#1a1200;}
+  .contact-links .btn-primary:hover{background:#fff; border-color:#fff;}
+  .contact-links .btn-ghost{border-color:var(--dark-line); color:#C7CFD8;}
+  .contact-links .btn-ghost:hover{border-color:#8A94A1; color:#fff;}
+
+  footer{padding:0 0 44px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    nav.links{display:none;}
+  }
+  @media (max-width:600px){
+    .stack-layer{grid-template-columns:1fr; gap:8px;}
+    .edu-item{flex-direction:column; gap:2px;}
+    .edu-meta{text-align:left;}
+    .contact{padding:32px 22px;}
+  }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <div class="brand">mohd_sahil<span class="dot">.</span>dev</div>
-    <div class="navlinks">
-      <a href="#skills">skills</a>
-      <a href="#projects">projects</a>
-      <a href="#experience">experience</a>
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo"><span class="dot"></span>mohd_sahil</div>
+    <nav class="links">
+      <a href="#work">work</a>
+      <a href="#stack">stack</a>
+      <a href="#log">log</a>
       <a href="#contact">contact</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="wrap">
-    <div class="term">
-      <div class="term-bar">
-        <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
-        <span class="term-title">sahil@portfolio: ~</span>
-      </div>
-      <div class="term-body">
-        <div class="term-line"><span class="prompt">$</span><span class="cmd cmd-typed">curl https://api.mohdsahil.dev/whoami</span></div>
-        <div class="resp">
-          {<br>
-          &nbsp;&nbsp;<span class="key">"name"</span>: <span class="str">"Mohd Sahil"</span>,<br>
-          &nbsp;&nbsp;<span class="key">"role"</span>: <span class="str">"Full-Stack Developer"</span>,<br>
-          &nbsp;&nbsp;<span class="key">"stack"</span>: [<span class="str">"MERN"</span>, <span class="str">"Spring Boot"</span>, <span class="str">"REST APIs"</span>],<br>
-          &nbsp;&nbsp;<span class="key">"location"</span>: <span class="str">"Lucknow, India"</span>,<br>
-          &nbsp;&nbsp;<span class="key">"status"</span>: <span class="status">200 available for opportunities</span><br>
-          }
-        </div>
-      </div>
-    </div>
-
-    <h1 class="hero-title">Building things that <span class="amber">respond&nbsp;200.</span></h1>
-    <p class="hero-sub">Computer Science graduate specializing in full-stack development — from REST APIs and databases to responsive UI. Comfortable across the MERN stack and Spring Boot, with a growing interest in AI-integrated applications.</p>
-    <div class="hero-links">
-      <a class="btn primary" href="mailto:sahilmuhammed652@gmail.com">Get in touch</a>
-      <a class="btn" href="#projects">View projects ↓</a>
-      <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
+    </nav>
   </div>
 </header>
 
-<section id="skills">
-  <div class="wrap">
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="bar"></span>Full-Stack Developer</div>
+        <h1 class="hero-title">Builds systems that <em>talk</em> to each other — and ships them.</h1>
+        <p class="hero-sub">Computer Science graduate focused on REST API design, authentication, database architecture, and wiring AI models into real products. Comfortable across the stack, from MongoDB schemas to Spring Boot services to React interfaces.</p>
+        <div class="hero-meta">
+          <span>📍 Lucknow, Uttar Pradesh, India</span>
+          <span>✉ sahilmuhammed652@gmail.com</span>
+        </div>
+        <div class="cta-row">
+          <a href="#work" class="btn btn-primary">View endpoints →</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+          <span class="terminal-title">session — ~/mohd-sahil</span>
+        </div>
+        <div class="terminal-body">
+          <div class="ln"><span class="prompt">$</span> whoami</div>
+          <div class="ln">mohd_sahil · full-stack developer</div>
+          <div class="ln"><span class="tcomment">&nbsp;</span></div>
+          <div class="ln"><span class="prompt">$</span> cat status.json</div>
+          <div class="ln">{ <span class="tkey">"open_to"</span>: [<span class="tstr">"frontend"</span>, <span class="tstr">"full-stack"</span>, <span class="tstr">"ml-eng"</span>],</div>
+          <div class="ln">&nbsp;&nbsp;<span class="tkey">"location"</span>: <span class="tstr">"Lucknow, IN"</span>,</div>
+          <div class="ln">&nbsp;&nbsp;<span class="tkey">"remote"</span>: <span class="tkey" style="color:#7FB0FF">true</span> }</div>
+          <div class="ln"><span class="prompt">$</span> <span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="section-head"><span class="section-tag">01</span></div>
+    <h2 class="section-title">Projects, as endpoints</h2>
+
     <div class="endpoint">
-      <span class="method get">GET</span>
-      <span class="path">/skills</span>
-      <span class="section-desc">// core stack</span>
-    </div>
-    <div class="skill-grid">
-      <div class="skill-block">
-        <h4>Languages</h4>
-        <div class="tag-row">
-          <span class="tag">Java</span><span class="tag">Python</span><span class="tag">C++</span>
-          <span class="tag">JavaScript</span><span class="tag">C#</span><span class="tag">Swift</span><span class="tag">Ruby</span>
-        </div>
+      <div class="endpoint-head">
+        <span class="method method-post">POST</span>
+        <span class="path">/social/twitter-clone</span>
+        <span class="status-pill"><span class="sdot"></span>200 OK</span>
       </div>
-      <div class="skill-block">
-        <h4>Web Development</h4>
-        <div class="tag-row">
-          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span>
-          <span class="tag">Spring Boot</span><span class="tag">Bootstrap</span><span class="tag">HTML/CSS</span>
+      <div class="endpoint-body">
+        <div class="project-name">Twitter Clone</div>
+        <p class="project-desc">Full-stack social app with authentication, tweet posting, a follow system, and real-time notifications.</p>
+        <div class="response-block">
+          <span class="rk">stack:</span> <span class="rv">Node.js · Express · MongoDB · JWT</span>
         </div>
-      </div>
-      <div class="skill-block">
-        <h4>Databases</h4>
-        <div class="tag-row">
-          <span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span>
-        </div>
-      </div>
-      <div class="skill-block">
-        <h4>Tools & Deployment</h4>
-        <div class="tag-row">
-          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Postman</span>
-          <span class="tag">Render</span><span class="tag">Netlify</span><span class="tag">Vercel</span>
-        </div>
-      </div>
-      <div class="skill-block" style="grid-column: 1/-1;">
-        <h4>Concepts</h4>
-        <div class="tag-row">
-          <span class="tag">REST APIs</span><span class="tag">JWT Auth</span><span class="tag">MVC</span>
-          <span class="tag">Microservices (Basics)</span><span class="tag">OOP</span><span class="tag">Agile/Scrum</span>
-        </div>
+        <ul class="project-points">
+          <li>RESTful APIs for user and tweet management</li>
+          <li>MongoDB schemas for users, posts, and follow relationships</li>
+          <li>JWT-based authentication for secure sessions</li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="projects">
-  <div class="wrap">
     <div class="endpoint">
-      <span class="method get">GET</span>
-      <span class="path">/projects</span>
-      <span class="section-desc">// 4 records</span>
-    </div>
-
-    <div class="project">
-      <div class="project-head">
-        <span class="project-name">/projects/twitter-clone</span>
-        <span class="status-code">200 OK</span>
+      <div class="endpoint-head">
+        <span class="method method-get">GET</span>
+        <span class="path">/commerce/tech-bajar</span>
+        <span class="status-pill"><span class="sdot"></span>200 OK</span>
       </div>
-      <div class="project-body">
-        <p class="project-desc">Full-stack Twitter-like social app — MERN Stack — with authentication, tweet posting, follow system, and real-time notifications.</p>
-        <ul>
-          <li>Built RESTful APIs with Node.js and Express for user and tweet management</li>
-          <li>Designed MongoDB schemas for users, posts, and follow relationships</li>
-          <li>Implemented JWT-based authentication for secure sessions</li>
-        </ul>
-        <div class="project-links">
-          <a href="#" target="_blank" rel="noopener">source →</a>
+      <div class="endpoint-body">
+        <div class="project-name">Tech Bajar — E-Commerce Platform</div>
+        <p class="project-desc">E-commerce web app with product listings, a cart system, user login, and an admin panel.</p>
+        <div class="response-block">
+          <span class="rk">stack:</span> <span class="rv">Spring Boot · MySQL · Bootstrap</span>
         </div>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="project-head">
-        <span class="project-name">/projects/tech-bajar</span>
-        <span class="status-code">200 OK</span>
-      </div>
-      <div class="project-body">
-        <p class="project-desc">E-commerce platform — Spring Boot + Bootstrap — with product listing, cart system, user login, and an admin panel.</p>
-        <ul>
-          <li>Built complete CRUD APIs for product management with MySQL integration</li>
-          <li>Implemented secure authentication and session handling</li>
-          <li>Designed a responsive UI using Bootstrap</li>
-          <li>Structured backend around REST API architecture for scalability</li>
+        <ul class="project-points">
+          <li>Complete CRUD APIs for product management with MySQL</li>
+          <li>Secure authentication and session handling</li>
+          <li>Responsive UI structured around REST architecture for scalability</li>
         </ul>
-        <div class="project-links">
-          <a href="#" target="_blank" rel="noopener">source →</a>
-        </div>
       </div>
     </div>
 
-    <div class="project">
-      <div class="project-head">
-        <span class="project-name">/projects/student-info-system</span>
-        <span class="status-code">200 OK</span>
-      </div>
-      <div class="project-body">
-        <p class="project-desc">Student management system — Java / Spring Boot — supporting add, update, delete, and search operations.</p>
-        <ul>
-          <li>Built REST APIs in Spring Boot for full CRUD functionality</li>
-          <li>Integrated MySQL for persistent data storage</li>
-          <li>Focused on clean, modular backend structure</li>
-        </ul>
-        <div class="project-links">
-          <a href="#" target="_blank" rel="noopener">source →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="project-head">
-        <span class="project-name">/projects/ai-story-generator</span>
-        <span class="status-code">200 OK</span>
-      </div>
-      <div class="project-body">
-        <p class="project-desc">AI-powered story generator with voice narration — Spring Boot — turning prompts into narrated audio stories.</p>
-        <ul>
-          <li>Built backend in Spring Boot to handle prompt requests and manage the story generation flow</li>
-          <li>Integrated Google's Gemini API to generate story content from user prompts</li>
-          <li>Integrated a text-to-speech (TTS) service to convert generated stories into narrated audio</li>
-          <li>Designed REST APIs to connect frontend requests with the AI generation and narration pipeline</li>
-        </ul>
-        <div class="project-links">
-          <a href="#" target="_blank" rel="noopener">source →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="wrap">
     <div class="endpoint">
-      <span class="method post">POST</span>
-      <span class="path">/experience</span>
-      <span class="section-desc">// training & internships</span>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-marker">3 months</div>
-      <div class="tl-content">
-        <h4>Web Technology Training — Softpro India</h4>
-        <p>Learned Bootstrap, Java, Spring Boot, REST APIs, MySQL, responsive UI development, and Git version control. Built mini web modules and backend APIs.</p>
+      <div class="endpoint-head">
+        <span class="method method-put">PUT</span>
+        <span class="path">/academic/student-info-system</span>
+        <span class="status-pill"><span class="sdot"></span>200 OK</span>
       </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-marker">40 days</div>
-      <div class="tl-content">
-        <h4>Data Science Training — Grastech</h4>
-        <p>Covered Python, NumPy, Pandas, Matplotlib, ML algorithms, data cleaning, EDA, model evaluation, and simple ML projects.</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-marker">internship</div>
-      <div class="tl-content">
-        <h4>Web Development Internship — CodeSoft</h4>
-        <p>Worked on responsive web pages, form validation, layout design, and improved UI experience using HTML, CSS, JS, and Bootstrap.</p>
+      <div class="endpoint-body">
+        <div class="project-name">Student Info System</div>
+        <p class="project-desc">Student management system supporting add, update, delete, and search operations.</p>
+        <div class="response-block">
+          <span class="rk">stack:</span> <span class="rv">Java · Spring Boot · MySQL</span>
+        </div>
+        <ul class="project-points">
+          <li>REST APIs in Spring Boot for full CRUD functionality</li>
+          <li>MySQL integration for persistent storage</li>
+          <li>Clean, modular backend structure</li>
+        </ul>
       </div>
     </div>
 
-    <div class="endpoint" style="margin-top:36px;">
-      <span class="method get">GET</span>
-      <span class="path">/education</span>
-    </div>
-    <div class="tl-item">
-      <div class="tl-marker">B.Tech</div>
-      <div class="tl-content">
-        <h4>Computer Science — Babu Banarasi Das University</h4>
-        <p>Lucknow, Uttar Pradesh, India</p>
-      </div>
-    </div>
-
-    <div class="endpoint" style="margin-top:36px;">
-      <span class="method get">GET</span>
-      <span class="path">/achievements</span>
-    </div>
-    <div class="ach-list">
-      <div class="ach-item"><span class="status">✓</span> Completed 3-Month Web Technology Training at Softpro India (Java, Spring Boot, Bootstrap, REST APIs)</div>
-      <div class="ach-item"><span class="status">✓</span> Earned 40-Day Data Science Certification at Grastech Institute — Python, ML algorithms, data visualization, EDA</div>
-      <div class="ach-item"><span class="status">✓</span> Awarded Web Development Internship Certificate from CodeSoft for real-world website tasks</div>
-      <div class="ach-item"><span class="status">✓</span> Completed Soft Skills & Professional Development Certification — Learnovate Enterprise, BBD University</div>
-      <div class="ach-item"><span class="status">✓</span> Completed Git & GitHub Basics Training as part of project workflow</div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
     <div class="endpoint">
-      <span class="method post">POST</span>
-      <span class="path">/contact</span>
-      <span class="section-desc">// let's talk</span>
+      <div class="endpoint-head">
+        <span class="method method-post">POST</span>
+        <span class="path">/ai/story-generator</span>
+        <span class="status-pill"><span class="sdot"></span>200 OK</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="project-name">AI Story Generator with Voice Narration</div>
+        <p class="project-desc">Generates short stories from user prompts and converts them into narrated audio.</p>
+        <div class="response-block">
+          <span class="rk">stack:</span> <span class="rv">Spring Boot · Gemini API · Text-to-Speech</span>
+        </div>
+        <ul class="project-points">
+          <li>Backend flow to handle prompts and manage story generation</li>
+          <li>Gemini API integration for story content generation</li>
+          <li>TTS integration to narrate generated stories</li>
+          <li>REST APIs connecting frontend requests to the generation pipeline</li>
+        </ul>
+      </div>
     </div>
-    <div class="summary-card">
-      Open to entry-level Software Developer roles. The fastest way to reach me is email —
-      <strong>sahilmuhammed652@gmail.com</strong> — or connect on GitHub / LinkedIn below.
-    </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="wrap foot-row">
-    <p>© 2026 Mohd Sahil — built with HTML, CSS &amp; a little JS</p>
-    <div class="foot-links">
-      <a href="mailto:sahilmuhammed652@gmail.com">email</a>
-      <a href="https://github.com/" target="_blank" rel="noopener">github</a>
-      <a href="#" target="_blank" rel="noopener">linkedin</a>
+  <section class="section" id="stack">
+    <div class="section-head"><span class="section-tag">02</span></div>
+    <h2 class="section-title">Stack, by layer</h2>
+
+    <div class="stack-layer">
+      <div class="layer-label">Interface</div>
+      <div class="tag-row">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Bootstrap</span>
+        <span class="tag">React.js</span>
+      </div>
     </div>
-  </div>
+    <div class="stack-layer">
+      <div class="layer-label">Service</div>
+      <div class="tag-row">
+        <span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">Spring Boot</span>
+        <span class="tag">REST APIs</span><span class="tag">JWT Auth</span>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="layer-label">Data</div>
+      <div class="tag-row">
+        <span class="tag">MongoDB</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="layer-label">Languages</div>
+      <div class="tag-row">
+        <span class="tag">Java</span><span class="tag">Python</span><span class="tag">C++</span>
+        <span class="tag">JavaScript</span><span class="tag">C#</span><span class="tag">Swift</span><span class="tag">Ruby</span>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="layer-label">Tooling</div>
+      <div class="tag-row">
+        <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Postman</span>
+        <span class="tag">VS Code</span><span class="tag">IntelliJ IDEA</span>
+        <span class="tag">Render</span><span class="tag">Netlify</span><span class="tag">Vercel</span>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="layer-label">Concepts</div>
+      <div class="tag-row">
+        <span class="tag">MVC</span><span class="tag">Microservices (basics)</span>
+        <span class="tag">OOP</span><span class="tag">Agile / Scrum</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="log">
+    <div class="section-head"><span class="section-tag">03</span></div>
+    <h2 class="section-title">Training &amp; internships</h2>
+
+    <div class="timeline">
+      <div class="tl-entry">
+        <div class="tl-time">3 months</div>
+        <div class="tl-role">Web Technology Training</div>
+        <div class="tl-org">Softpro India</div>
+        <p class="tl-desc">Bootstrap, Java, Spring Boot, REST APIs, MySQL, responsive UI development, and Git version control. Built mini web modules and backend APIs.</p>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-time">40 days</div>
+        <div class="tl-role">Data Science Training</div>
+        <div class="tl-org">Grastech</div>
+        <p class="tl-desc">Python, NumPy, Pandas, Matplotlib, ML algorithms, data cleaning, EDA, and model evaluation through simple ML projects.</p>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-time">Internship</div>
+        <div class="tl-role">Web Development Internship</div>
+        <div class="tl-org">CodeSoft</div>
+        <p class="tl-desc">Responsive web pages, form validation, layout design, and improved UI experience using HTML, CSS, JS, and Bootstrap.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="border-bottom:none; padding-bottom:0;">
+    <div class="section-head"><span class="section-tag">04</span></div>
+    <h2 class="section-title">Education</h2>
+
+    <div class="edu-item">
+      <div class="edu-title">Bachelor of Technology, Computer Science</div>
+      <div class="edu-meta">Babu Banarasi Das University<br>Lucknow, Uttar Pradesh</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-title">Intermediate — 76%</div>
+      <div class="edu-meta">Dabble Public School, Banthara<br>CBSE Board · 2021</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-title">High School — 82%</div>
+      <div class="edu-meta">Dabble Public School, Banthara<br>CBSE Board · 2019</div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-title">Let's build something.</div>
+    <p class="contact-sub">Open to entry-level Software Developer, Full-Stack, and ML Engineer roles — reach out anytime.</p>
+    <div class="contact-cmds">
+      <a href="mailto:sahilmuhammed652@gmail.com" class="cmd"><span class="prompt">$</span> contact <span class="flag">--email</span> <span class="val">sahilmuhammed652@gmail.com</span></a>
+      <a href="tel:+918564026293" class="cmd"><span class="prompt">$</span> contact <span class="flag">--phone</span> <span class="val">+91 85640 26293</span></a>
+      <a href="https://www.linkedin.com/in/mohd-sahil-0166a52a1" class="cmd"><span class="prompt">$</span> contact <span class="flag">--linkedin</span> <span class="val">/mohd-sahil</span></a>
+      <a href="https://github.com/Sahil856402" class="cmd"><span class="prompt">$</span> contact <span class="flag">--github</span> <span class="val">/Sahil856402</span></a>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:sahilmuhammed652@gmail.com" class="btn btn-primary">Email me</a>
+      <a href="https://github.com/Sahil856402" class="btn btn-ghost">GitHub</a>
+      <a href="https://www.linkedin.com/in/mohd-sahil-0166a52a1" class="btn btn-ghost">LinkedIn</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="wrap">
+  <span>© 2026 Mohd Sahil</span>
+  <span>Lucknow, Uttar Pradesh, India</span>
 </footer>
 
 </body>
